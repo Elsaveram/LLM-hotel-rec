@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
     Container,
-    MenuItem,
     Paper,
-    Select,
     Stack
 } from '@mui/material';
 
@@ -14,7 +12,6 @@ import ChatTextField from './ChatTextField';
 const Chat = () => {
     const username = "User";
     const [messageData, setMessageData] = useState([]);
-    const [country, setCountry] = useState("ANY");
 
     const callApi = () => {
         const messages = messageData.map(({name, isUser, text}) => {
@@ -30,7 +27,7 @@ const Chat = () => {
             }
         });
 
-        callHotelSearch(messages, country).then((payload) => {
+        callHotelSearch(messages).then((payload) => {
             setMessageData([...messageData, {
                 name: "AI",
                 isUser: false,
@@ -59,28 +56,6 @@ const Chat = () => {
         return <ChatEntry key={i} {...message} />
     });
 
-    const handleChangeCountry = (event: SelectChangeEvent) => {
-        console.log(event.target.value)
-        setCountry(event.target.value);
-    };
-
-    const countrySelect = (
-        <Select
-            id="country-select"
-            label="Country"
-            value={country}
-            onChange={handleChangeCountry}
-        >
-            <MenuItem value={"ANY"}>Any</MenuItem>
-            <MenuItem value={"Spain"}>Spain</MenuItem>
-            <MenuItem value={"Netherlands"}>Netherlands</MenuItem>
-            <MenuItem value={"Austria"}>Austria</MenuItem>
-            <MenuItem value={"UK"}>United Kingdom</MenuItem>
-            <MenuItem value={"France"}>France</MenuItem>
-            <MenuItem value={"Italy"}>Italy</MenuItem>
-        </Select>
-    )
-
     return (
         <Container
         >
@@ -92,7 +67,6 @@ const Chat = () => {
                 }}
             >
                 <Stack>
-                    {countrySelect}
                     {messages}
                     <ChatTextField submitFn={addUserMessagData}/>
                 </Stack>
