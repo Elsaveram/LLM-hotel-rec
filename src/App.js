@@ -7,7 +7,7 @@ const config = {
         endpoints: [
             {
                 name: "hotelSearchAppApi",
-                endpoint: "http://127.0.0.1:5000"
+                endpoint: "https://p72q3re0bj.execute-api.us-east-2.amazonaws.com/PROD"
             }
         ]
     }
